@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Blue Hark - Profile</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Inline CSS for profile page buttons */
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .button-container form {
+      margin: 5px;
+    }
+    .button-container button {
+      background-color: #ffc107;
+      color: #333;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .button-container button:hover {
+      background-color: #e0a800;
+      transform: scale(1.05);
+    }
+    .profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 10px;
+    }
+    .profile-header {
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-header">
+      <% if (user.profile_pic) { %>
+        <img src="<%= user.profile_pic %>" alt="Profile Picture" class="profile-pic">
+      <% } else { %>
+        <img src="/default-profile.png" alt="Default Profile Picture" class="profile-pic">
+      <% } %>
+      <h1>Profile for <%= user.username %></h1>
+    </div>
+    <p>Total Referral Points: <%= totalRefs %></p>
+    
+    <h2>Your Giveaways</h2>
+    <ul>
+      <% giveaways.forEach(giveaway => { %>
+        <li>
+          <a href="/dashboard/<%= giveaway.id %>"><%= giveaway.name %></a>
+        </li>
+      <% }); %>
+    </ul>
+    
+    <!-- Form to upload profile picture -->
+    <form action="/uploadProfilePic" method="POST" enctype="multipart/form-data">
+      <label for="profilePic">Upload Profile Picture:</label>
+      <input type="file" name="profilePic" id="profilePic" accept="image/*" required>
+      <button type="submit">Upload</button>
+    </form>
+    
+    <div class="button-container">
+      <form action="/" method="GET">
+        <button type="submit">Home</button>
+      </form>
+      <form action="/create" method="GET">
+        <button type="submit">Create Giveaway</button>
+      </form>
+      <form action="/leaderboard" method="GET">
+        <button type="submit">Leaderboard</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

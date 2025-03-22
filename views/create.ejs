@@ -1,20 +1,90 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/style.css">
   <meta charset="UTF-8">
   <title>Blue Hark - Create Giveaway</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Basic styling for the create giveaway form */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(to right, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      margin: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    form input {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+    form button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #ffc107;
+      color: #333;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    form button:hover {
+      background: #e0a800;
+    }
+    p {
+      text-align: center;
+      margin-top: 20px;
+    }
+    /* Mobile responsive adjustments */
+    @media (max-width: 600px) {
+      .container {
+        width: 95%;
+        padding: 15px;
+      }
+      form input, form button {
+        font-size: 1rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h1>Create a Giveaway</h1>
-  <form action="/create" method="POST">
-    <input type="text" name="name" placeholder="Giveaway Room Name" required>
-    <br>
-    <input type="text" name="channel_link" placeholder="Channel Link" required>
-    <br>
-    <button type="submit">Create Giveaway</button>
-  </form>
-  <p><a href="/">Back to Home</a></p>
-<script src="/js/api-fetch.js"></script>
+  <div class="container">
+    <h1>Create a Giveaway</h1>
+    <form action="/create" method="POST">
+      <input type="text" name="name" placeholder="Giveaway Room Name" required>
+      <input type="text" 
+             name="channel_link" 
+             placeholder="Channel Link" 
+             required
+             pattern="https?://.+" 
+             title="Channel link must start with http:// or https://">
+      <button type="submit">Create Giveaway</button>
+    </form>
+    <p><a href="/">Back to Home</a></p>
+  </div>
+  <script src="/js/api-fetch.js"></script>
 </body>
 </html>

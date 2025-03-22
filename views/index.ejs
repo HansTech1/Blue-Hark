@@ -1,29 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="/style.css">
   <meta charset="UTF-8">
   <title>Blue Hark - Home</title>
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    /* Inline CSS for navigation buttons on the index page */
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .button-container form {
+      margin: 5px;
+    }
+    .button-container button {
+      background-color: #ffc107;
+      color: #333;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .button-container button:hover {
+      background-color: #e0a800;
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to Blue Hark</h1>
-  <% if (user) { %>
-    <p>Hello, <%= user.username %>! (<a href="/logout">Logout</a>)</p>
-    <p><a href="/create">Create a Giveaway</a></p>
-  <% } else { %>
-    <p><a href="/signup">Sign Up</a> | <a href="/login">Log In</a></p>
-  <% } %>
-  <h2>Active Giveaways</h2>
-  <ul>
-    <% giveaways.forEach(g => { %>
-      <li>
-        <a href="/giveaway/<%= g.id %>"><%= g.name %></a>
-        <% if (user && g.user_id === user.id) { %>
-          - <a href="/dashboard/<%= g.id %>">Dashboard</a>
-        <% } %>
-      </li>
-    <% }) %>
-  </ul>
-<script src="/js/api-fetch.js"></script>
+  <div class="container">
+    <h1>Welcome to Blue Hark</h1>
+    <% if (user) { %>
+      <p>Hello, <%= user.username %>!</p>
+    <% } %>
+    <h2>Active Giveaways</h2>
+    <ul>
+      <% giveaways.forEach(g => { %>
+        <li>
+          <a href="/giveaway/<%= g.id %>"><%= g.name %></a>
+          <% if (user && g.user_id === user.id) { %>
+            - <a href="/dashboard/<%= g.id %>">Dashboard</a>
+          <% } %>
+        </li>
+      <% }); %>
+    </ul>
+    
+    <!-- Navigation Buttons -->
+    <div class="button-container">
+      <% if (!user) { %>
+        <form action="/signup" method="GET">
+          <button type="submit">Sign Up</button>
+        </form>
+        <form action="/login" method="GET">
+          <button type="submit">Log In</button>
+        </form>
+      <% } else { %>
+        <form action="/create" method="GET">
+          <button type="submit">Create a Giveaway</button>
+        </form>
+        <form action="/profile" method="GET">
+          <button type="submit">Profile</button>
+        </form>
+      <% } %>
+      <form action="/" method="GET">
+        <button type="submit">Home</button>
+      </form>
+      <form action="/leaderboard" method="GET">
+        <button type="submit">Leaderboard</button>
+      </form>
+    </div>
+  </div>
+  <script src="/js/api-fetch.js"></script>
 </body>
 </html>
