@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <title>Blue Hark - Home</title>
+</head>
+<body>
+  <h1>Welcome to Blue Hark</h1>
+  <% if (user) { %>
+    <p>Hello, <%= user.username %>! (<a href="/logout">Logout</a>)</p>
+    <p><a href="/create">Create a Giveaway</a></p>
+  <% } else { %>
+    <p><a href="/signup">Sign Up</a> | <a href="/login">Log In</a></p>
+  <% } %>
+  <h2>Active Giveaways</h2>
+  <ul>
+    <% giveaways.forEach(g => { %>
+      <li>
+        <a href="/giveaway/<%= g.id %>"><%= g.name %></a>
+        <% if (user && g.user_id === user.id) { %>
+          - <a href="/dashboard/<%= g.id %>">Dashboard</a>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+<script src="/js/api-fetch.js"></script>
+</body>
+</html>

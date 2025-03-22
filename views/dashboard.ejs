@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <title>Blue Hark - Dashboard</title>
+</head>
+<body>
+  <h1>Dashboard for "<%= giveaway.name %>"</h1>
+  <p>Channel Link: <a href="<%= giveaway.channel_link %>"><%= giveaway.channel_link %></a></p>
+  <h2>Referral Leaderboard</h2>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Referrer Name</th>
+        <th>Referral Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% referrals.forEach(r => { %>
+        <tr>
+          <td><%= r.referrer_name %></td>
+          <td><%= r.referral_count %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+  <p>Your giveaway link (share it to get referrals): <a href="/giveaway/<%= giveaway.id %>">/giveaway/<%= giveaway.id %></a></p>
+  <p><a href="/">Back to Home</a></p>
+<script src="/js/api-fetch.js"></script>
+</body>
+</html>

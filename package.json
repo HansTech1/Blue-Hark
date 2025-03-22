@@ -1,0 +1,19 @@
+{
+  "name": "blue-hark",
+  "version": "1.0.0",
+  "description": "A Giveaway system built with Node.js, Express, EJS, and PostgreSQL",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "pg": "^8.9.0",
+    "uuid": "^9.0.0"
+  }
+}
